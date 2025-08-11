@@ -1,0 +1,29 @@
+/*
+Implemente um programa que verifique se uma string é um palíndromo (lê-se igual de 
+trás para frente, ignorando espaços e pontuação).
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int palindromo(char *str){
+    int i = 0;
+    int j = strlen(str) - 1;
+    while(i < j){
+        if(str[i] != str[j]) return 0;
+        i++;
+        j--;
+    }
+    return 1;
+}
+
+int main(){
+    char str[50];
+    printf("Digite sua string: ");
+    gets(str);
+    if(palindromo(str) == 0) printf("Sua string não eh palindromo.");
+    else printf("Sua string eh palindromo.");
+    getchar();
+    return 0;
+}
