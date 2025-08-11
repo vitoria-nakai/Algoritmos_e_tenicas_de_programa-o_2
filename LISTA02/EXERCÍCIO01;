@@ -1,0 +1,16 @@
+/*
+Escreva um programa que leia uma string do usuário e imprima seu comprimento.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    char string[50];
+    printf("Digite sua string: ");
+    gets(string);
+    printf("O comprimento de sua string é de %ld letras", strlen(string));
+    getchar();
+    return 0;
+}
