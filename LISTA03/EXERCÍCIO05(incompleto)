@@ -1,0 +1,28 @@
+/*
+ Escreva um programa que procure por uma palavra específica em 
+um arquivo de texto e exiba as linhas que contêm essa palavra.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    FILE * file;
+    file = fopen("arquivo.txt", "r");
+    
+    char palavra[50];
+    char str[50];
+    
+    printf("Digite uma palavra: ");
+    scanf("%s", palavra);
+    
+    printf("Essa palavra aparece nas linhas:\n");
+    
+    for(int i = 0; fgets(str, sizeof(str), file); i++){
+        if(strstr(str, palavra) == 0) printf("%d\n", i);
+    }
+    
+    getchar();
+    return 0;
+}
