@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+/*
+a) Definir o registro regFunc, para cadastro de funcionários, e declarar a variável global “tipo 
+ponteiro” listaRFunc;
+
+ b) Construir um subprograma para realizar a leitura dos dados (matrícula e nome), a partir 
+do teclado, de um funcionário a ser cadastrado, e incluir este novo registro de funcionário na 
+lista de funcionários.
+
+c) Fazer um subprograma que percorra a lista montada escrevendo Número de Matrícula e 
+Nome de cada nó. 
+ */   
+
+struct regFunc{
+    int Numero_Matricula;
+    char Nome[50];
+    struct regFunc * lig; 
+};
+
+struct regFunc *listaRFunc = NULL;
+
+void cadastro(struct regFunc **listaRFunc, int Numero_Matricula, char *Nome){
+    struct regFunc * mediador;
+    mediador = (struct regFunc*) malloc(sizeof(struct regFunc));
+    if(mediador == NULL){
+        printf("Erro de alocação de memória!\n");
+        exit(1);
+    }
+    mediador->Numero_Matricula = Numero_Matricula;
+    strcpy(mediador->Nome, Nome);
+    mediador->lig = *listaRFunc;
+    *listaRFunc = mediador;
+}
+
+int main(){
+    int numero_matricula[10];
+    char nome[50];
+    
+    printf("------REGISTRO DE MATRÍCULA------\n");
+    for(int i = 0; i < 10; i++){
+        printf("Digite o número de matrícula: ");
+        scanf("%d", numero_matricula);
+        printf("Digite o nome da matrícula: ");
+        scanf("%s", nome);
+        cadastro(listaRFunc, numero_matricula[i], nome);
+    }
+    
+}
