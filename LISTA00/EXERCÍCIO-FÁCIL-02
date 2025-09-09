@@ -1,0 +1,21 @@
+/*Elabore um programa que utilize uma struct para representar um ponto em um plano cartesiano 2D. A struct deve ser chamada Ponto e conter dois campos:
+x (inteiro)
+y (inteiro)
+O programa deve solicitar ao usuário que insira as coordenadas de um ponto, armazená-las em uma variável do tipo Ponto e, ao final, imprimir as coordenadas lidas.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Ponto{
+    int x;
+    int y;
+};
+
+int main(){
+    struct Ponto Coordenadas;
+    printf("Insira as coordenadas x y de um ponto no plano cartesiano: ");
+    scanf("%d %d", &Coordenadas.x, &Coordenadas.y);
+    printf("\nPonto inserido:(%d, %d)", Coordenadas.x, Coordenadas.y);
+    return 0;
+}
