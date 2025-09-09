@@ -14,9 +14,11 @@ int main(){
     
     arquivo = fopen("frase.txt", "r");
     
-    fgets(frase, sizeof(frase), arquivo);
+  
+    while(fgets(frase, sizeof(frase), arquivo) != NULL)
+        printf("%s", frase);
     
-    printf("%s", frase);
+    fclose(arquivo);
     
     return 0;
 }
