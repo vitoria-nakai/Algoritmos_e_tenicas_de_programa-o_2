@@ -1,0 +1,30 @@
+/*
+Crie um programa que pede ao usuário para digitar seu nome e o 
+adiciona ao final do arquivo frase.txt, sem apagar o conteúdo 
+que já existe lá.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    FILE *arquivo;
+    char nome[50];
+    
+    arquivo = fopen("frase.txt", "a");
+    if(arquivo == NULL){
+        printf("Erro ao abrir o arquivo.");
+        return 1;
+    }
+    
+    printf("Digite seu nome: ");
+    fgets(nome, 50, stdin);
+    nome[strcspn(nome, "\n")] = '\0';
+    
+    fputs(nome, arquivo);
+    
+    fclose(arquivo);
+    
+    return 0;
+}
