@@ -1,0 +1,33 @@
+/*
+Escreva uma função que inverta uma string. A função deve receber a string como parâmetro e modificá-la.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+char* inverter(char* palavra){
+    int qtd = strlen(palavra) - 1;
+    char med;
+    
+    for(int i = 0; i < qtd; i++){
+        med = palavra[i];
+        palavra[i] = palavra[qtd];
+        palavra[qtd] = med;
+        qtd--;
+    }
+    return palavra;
+}
+
+int main(){
+    char palavra[50];
+    
+    printf("Digite uma palavra: ");
+    fgets(palavra, 50, stdin);
+    palavra[strcspn(palavra, "\n")] = '\0';
+    
+    inverter(palavra);
+    
+    printf("A palavra invertida fica %s", palavra);
+    return 0;
+}
