@@ -22,9 +22,9 @@ int main(){
     
     for(int i = 0; i < 3; i++){
         printf("Título do livro %d:", (i + 1));
-        gets(Biblioteca[i].titulo);
+        fgets(Biblioteca[i].titulo, 50, stdin);
         printf("Autor do livro %d:", (i + 1));
-        gets(Biblioteca[i].autor);
+        fgets(Biblioteca[i].autor, 50, stdin);
         printf("Ano de publicação do livro %d:", (i + 1));
         scanf("%d", &Biblioteca[i].ano_publicacao);
         getchar();
