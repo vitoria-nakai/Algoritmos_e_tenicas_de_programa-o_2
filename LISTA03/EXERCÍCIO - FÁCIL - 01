@@ -1,0 +1,27 @@
+/*
+Crie um programa que pede ao usuário para digitar uma frase e, 
+em seguida, salva essa frase em um arquivo de texto chamado
+frase.txt.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    FILE *arquivo;
+    char frase[50];
+    
+    arquivo = fopen("frase.txt", "w");
+    if(arquivo == NULL){
+        printf("Erro ao criar arquivo.");
+        return 1;
+    }
+    
+    printf("Digite a frase que quer escrever no arquivo frase.txt: ");
+    fgets(frase, 50, stdin);
+    
+    fputs(frase, arquivo);
+    
+    return 0;
+}
