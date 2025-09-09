@@ -1,0 +1,41 @@
+/*
+Desenvolva um programa que crie uma struct para armazenar informações sobre um livro. A estrutura deve incluir:
+titulo (string)
+autor (string)
+anoPublicacao (inteiro)
+No programa principal (main), crie um vetor (array) de 3 posições dessa struct. Preencha os dados de 3 livros diretamente no código e, em seguida, use um laço de repetição (for) para exibir as informações de todos os livros cadastrados.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Livro{
+    char titulo[50];
+    char autor[50];
+    int ano_publicacao;
+};
+
+int main(){
+    struct Livro Biblioteca[3];
+    
+    printf("---------- Cadastro de livros ----------\n\n");
+    
+    for(int i = 0; i < 3; i++){
+        printf("Título do livro %d:", (i + 1));
+        gets(Biblioteca[i].titulo);
+        printf("Autor do livro %d:", (i + 1));
+        gets(Biblioteca[i].autor);
+        printf("Ano de publicação do livro %d:", (i + 1));
+        scanf("%d", &Biblioteca[i].ano_publicacao);
+        getchar();
+        printf("\n");
+    }
+    printf("\n----------Revisão do cadastro ----------\n\n");
+    for(int i = 0; i < 3; i++){
+        printf("\nTítulo do livro %d: %s", (i + 1), Biblioteca[i].titulo);
+        printf("\nAutor do livro %d: %s", (i + 1), Biblioteca[i].autor);
+        printf("\nAno de publicação do livro %d: %d", (i + 1), Biblioteca[i].ano_publicacao);
+        printf("\n");
+    }
+    return 0;
+}
