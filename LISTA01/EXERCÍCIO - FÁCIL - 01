@@ -4,6 +4,7 @@ Crie uma função que receba uma string como parâmetro e retorne o número de c
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 int contador(char palavra[50]){
     int aux = 0;
@@ -22,8 +23,9 @@ int main(){
     
     printf("Digite um nome: ");
     fgets(nome, 50, stdin);
+    nome[strcspn(nome, "\n")] = '\0';
     
-    printf("\nO nome contém %d caracteres", contador(nome) - 1);
+    printf("\nO nome contém %d caracteres", contador(nome));
     
     return 0;
     
