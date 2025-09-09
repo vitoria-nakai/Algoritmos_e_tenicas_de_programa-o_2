@@ -1,0 +1,22 @@
+/*
+Crie um programa que lê o conteúdo do arquivo frase.txt e o exibe
+na tela.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    
+    FILE *arquivo;
+    char frase[50];
+    
+    arquivo = fopen("frase.txt", "r");
+    
+    fgets(frase, sizeof(frase), arquivo);
+    
+    printf("%s", frase);
+    
+    return 0;
+}
