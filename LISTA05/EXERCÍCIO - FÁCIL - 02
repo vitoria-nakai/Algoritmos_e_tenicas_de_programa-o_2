@@ -1,0 +1,47 @@
+/*
+Criar uma função que adicione um novo nó no começo da lista.
+1. Escreva uma função "insereNoInicio" que recebe um ponteiro para o 
+ponteiro do início da lista(**head_ref) e o novo dado a ser inserido.
+2. A função deve criar um novo nó, atribuir o dado a ele e fazer com
+que ele seja o novo "head" da lista.
+3. No "main", comece com uma lista vazia (head = NULL).
+4. Use sua função para inserir os valores 5, 15 e 25.
+5. Imprima a lista final para verificar o resultado (pode reutilizar
+a função do exercício anterior).
+*/
+
+#include<stdlib.h>
+#include<stdio.h>
+
+typedef struct no{
+    int dado;
+    struct no * proximo;
+} no;
+
+void insereNoInicio(struct no ** head, int novoDado){
+    no * novoHead = (no*)malloc(sizeof(no));
+    novoHead->dado = novoDado;
+    novoHead->proximo = *head;
+    *head = novoHead;
+}
+
+void imprimirLista(struct no *head){
+    
+    while(head != NULL){
+        printf("%d -> ", head->dado);
+        head = head->proximo;
+    }
+    printf("NULL");
+}
+
+int main(){
+    no * Head = NULL;
+    
+    insereNoInicio(&Head, 5);
+    insereNoInicio(&Head, 15);
+    insereNoInicio(&Head, 25);
+    
+    imprimirLista(Head);
+    
+    return 0;
+}
