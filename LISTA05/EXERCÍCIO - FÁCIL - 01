@@ -18,10 +18,9 @@ typedef struct no{
 } no;
 
 void imprimirLista(no * head){
-    no * atual = head;
-    while(atual != NULL){
-        printf("%d -> ", atual->dado);
-        atual = atual->proximo;
+    while(head != NULL){
+        printf("%d -> ", head->dado);
+        head = head->proximo;
     }
     printf("NULL");
 }
