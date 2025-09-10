@@ -1,0 +1,49 @@
+/*
+Criar uma função que insira três números inteiros em uma lista 
+encadeada e outra função para imprimir todos os elementos da lista.
+
+1. Crie uma função "imprimirLista" que recebe o ponteiro para o início
+da lista e imprime o valor de cada nó até o final.
+2. No main, crie manualmente uma lista com três nós contendo os 
+valores 10, 20 e 30.
+3. Chame a função "imprimirLista" para exibir o conteúdo da sua lista.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct no{
+    int dado;
+    struct no * proximo;
+} no;
+
+void imprimirLista(no * head){
+    no * atual = head;
+    while(atual != NULL){
+        printf("%d -> ", atual->dado);
+        atual = atual->proximo;
+    }
+    printf("NULL");
+}
+
+int main(){
+    
+    no * primeiroNo = (no*)malloc(sizeof(no));
+    primeiroNo->dado = 10;
+    
+    no * segundoNo = (no*)malloc(sizeof(no));
+    segundoNo->dado = 20;
+    
+    no * terceiroNo = (no*)malloc(sizeof(no));
+    terceiroNo->dado = 30;
+    
+    primeiroNo->proximo = segundoNo;
+    
+    segundoNo->proximo = terceiroNo;
+    
+    terceiroNo->proximo = NULL;
+    
+    imprimirLista(primeiroNo);
+    
+    return 0;
+}
