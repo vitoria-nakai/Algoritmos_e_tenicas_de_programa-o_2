@@ -1,0 +1,48 @@
+/*
+Praticar a travessia da lista para realizar uma contagem.
+1. Crie uma função chamada "contarNos" que recebe o ponteiro do inicio
+da lista (head).
+2. A função deve percorrer toda a lista e retornar o número total de nós.
+3. No "main", crie uma lista com alguns elementos (pode ser da forma do
+exercício 1 ou 2).
+4. Chame a função "contarNos" e imprima o resultado.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct no{
+    int dado;
+    struct no * proximo;
+} no;
+
+int contarNos(no * head){
+    int contador = 0;
+    
+    while(head != NULL){
+        contador++;
+        head = head->proximo;
+    }
+    return contador;
+}
+
+int main(){
+    
+    no * primeiroNo = (no*)malloc(sizeof(no));
+    primeiroNo->dado = 1;
+    
+    no * segundoNo = (no*)malloc(sizeof(no));
+    segundoNo->dado = 2;
+    
+    no * terceiroNo = (no*)malloc(sizeof(no));
+    terceiroNo->dado = 3;
+    
+    primeiroNo->proximo = segundoNo;
+    segundoNo->proximo = terceiroNo;
+    terceiroNo->proximo = NULL;
+    
+    printf("A quantidade de elementos da lista é %d", contarNos(primeiroNo));
+    return 0;
+    
+    
+}
