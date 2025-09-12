@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct{
+    int alta;
+    int ficha;
+    int pesoInicial;
+    int pesoFinal;
+    char nome[50];
+    int diasTratamento;
+    int qtdCalorias[30];
+} hospede;
+
+void cadastroHospede(hospede * cadastro[]){
+    int ficha, pesoI, qtdDias;
+    
+    printf("Qual ficha deseja cadastrar (1 a 20)?");
+    scanf("%d", &ficha);
+    cadastro[ficha - 1]->ficha = ficha;
+    
+    getchar();
+    
+    printf("Digite o nome do paciente: ");
+    fgets(cadastro[ficha-1]->nome, sizeof(cadastro[ficha-1]->nome), stdin);
+    cadastro[ficha]->nome[strcspn(cadastro[ficha-1]->nome, "\n")] = '\0';
+    
+    printf("Digite o peso inicial do paciente em gramas: ");
+    scanf("%d", &pesoI);
+    cadastro[ficha - 1]->pesoInicial = pesoI;
+    
+    printf("Digite a quantidade de dias de tratamento: ");
+    scanf("%d", &qtdDias);
+    cadastro[ficha-1]->diasTratamento = qtdDias;
+    
+    for(int i = 0; i < cadastro[ficha-1]->diasTratamento; i++){
+        int calorias;
+        printf("Digite a quantidade de calorias para o dia %d: ", i);
+        scanf("%d", &calorias);
+        cadastro[ficha-1]->qtdCalorias[i] = calorias;
+    }
+}
+
+void alta(hospede * cadastro[]){
+    int pesoF, ficha;
+    
+    printf("Qual ficha deseja dar alta (1 a 20)?");
+    scanf("%d", &ficha);
+    
+    printf("Digite o peso final em gramas do paciente: ");
+    scanf("%d", &pesoF);
+    cadastro[ficha-1]->pesoFinal = pesoF;
+    
+    cadastro[ficha-1]->alta = 1;
+    
+    printf("Durante o período de tratamento o paciente perdeu aproximadamente %d kg.", ((cadastro[ficha-1]->pesoFinal - cadastro[ficha-1]->pesoInicial) / 1000));
+    printf("\nO paciente teve alta!\n\n");
+}
+
+int main(){
+    int opcao = 1;
+    hospede * cadastro[20] = {NULL};
+    
+    for(int i = 0; i < 20; i++){
+        cadastro[i] = (hospede*)malloc(sizeof(hospede));
+        
+        if(cadastro[i] == NULL){
+            printf("Erro ao alocar memória.");
+            return 1;
+        }
+    }
+
+    while(opcao != 0){
+    
+        printf("---------- SPA REI MOMO ----------\n\n");
+        printf("Escolha umas das opções abaixo, digitando o número correspondente.\n\n");
+        printf("1 - Cadastro de paciente.\n");
+        printf("2 - Alta em paciente.\n");
+        printf("0 - Fechar o sistema.\n\n");
+    
+        scanf("%d", &opcao);
+    
+        if(opcao == 1) cadastroHospede(cadastro);
+        else if(opcao == 2) alta(cadastro);
+        else if(opcao == 0){
+            printf("Finalização do sistema.");
+            return 1;
+        } else printf("Dígito sem opção, digite novamente.");
+        }
+        
+    for(int i = 0; i < 20; i++) free(cadastro[i]);
+    
+    return 0;
+}
