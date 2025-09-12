@@ -6,24 +6,29 @@ Crie um programa que leia uma string e a imprima de trás para frente.
 #include<stdlib.h>
 #include<string.h>
 
-void inversão(char *string){
-    int j = strlen(string) - 1; //para desconsiderar o caractere nulo da inversão;
-    char mediador;
+void imprimirInvertido(char str[50]){
+    int aux = strlen(str);
     
-    for(int i = 0; i < j; i++){
-        mediador = string[i];
-        string[i] = string[j];
-        string[j] = mediador;
-        j--;
+    printf("A string invertida fica ");
+    
+    for(int i = aux - 1; i > -1; i--){
+        printf("%c", str[i]);
+        if(i > 0){
+            printf(" -> ");
+        }
     }
 }
 
 int main(){
     char string[50];
-    printf("Digite sua string: ");
-    gets(string);
-    inversão(string);
-    printf("A sua string invertida fica %s", string);
-    getchar();
+    
+    printf("Digite uma string: ");
+    
+    fgets(string, sizeof(string), stdin);
+    string[strcspn(string, "\n")] = '\0';
+    
+    imprimirInvertido(string);
+    
     return 0;
+    
 }
