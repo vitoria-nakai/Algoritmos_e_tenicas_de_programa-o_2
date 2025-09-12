@@ -6,21 +6,28 @@ Escreva uma função que conte o número de vogais em uma string.
 #include<stdlib.h>
 #include<string.h>
 
-int qtd_vogais(char *str){
-    int qtd = 0;
-    for(int i = 0; i < strlen(str); i++)
-        if(str[i] == 'a' || str[i] == 'A' || str[i] == 'e' || str[i] == 'E'
-         || str[i] == 'i' ||str[i] == 'I' || str[i] == 'o' || str[i] == 'O'
-         || str[i] == 'u' || str[i] == 'U') qtd++;
-    return qtd;
+int contarVogais(char str[]){
+    int qtd = strlen(str);
+    int contador = 0;
+    
+    for(int i = 0; i < qtd; i++)
+        if(str[i] == 'A' || str[i] == 'a' || str[i] == 'E' || str[i] == 'e' || str[i] == 'I' || str[i] == 'i' ||
+        str[i] == 'O' || str[i] == 'o' || str[i] == 'U' || str[i] == 'u') 
+            contador++;
+    
+    return contador;
 }
 
 int main(){
-    char str[50];
-    printf("Digite sua string: ");
-    gets(str);
-    printf("\nA quantidade de vogais na sua string eh de %d.", qtd_vogais(str));
-    getchar();
-    return 0;
+    char string[50];
+    int qtdVogais;
     
+    printf("Digite uma string: ");
+    fgets(string, sizeof(string), stdin);
+    
+    qtdVogais = contarVogais(string);
+    
+    printf("A quantidade de vogais é de %d", qtdVogais);
+    
+    return 0;
 }
