@@ -4,13 +4,29 @@ Escreva um programa que leia uma string do usuário e imprima seu comprimento.
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<string.h>
+
+int medirComprimento(char str[50]){
+    int contador = 0;
+    
+    for(int i = 0; i < 50; i++){
+        if(str[i] != '\0')
+        contador++;
+        else break;
+    }
+    return contador;
+}
 
 int main(){
     char string[50];
-    printf("Digite sua string: ");
-    gets(string);
-    printf("O comprimento de sua string é de %ld letras", strlen(string));
+    int comprimento;
+    
+    printf("Digite uma string: ");
     getchar();
+    fgets(string, sizeof(string), stdin);
+    
+    comprimento = medirComprimento(string);
+    
+    printf("O comprimento da string é de %d", comprimento);
+    
     return 0;
 }
