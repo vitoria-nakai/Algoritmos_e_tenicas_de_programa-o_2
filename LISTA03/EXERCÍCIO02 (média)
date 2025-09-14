@@ -1,0 +1,21 @@
+/*
+Escreva um programa que leia o conteúdo do arquivo "nomes.txt" 
+criado no exercício anterior e exiba os nomes na tela.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    
+    FILE * arquivo = fopen("nomes.txt", "r");
+    
+    char string[] = "inicial";
+    
+    while(fgets(string, sizeof(string), arquivo) != NULL){
+        printf("%s", string);
+    }
+   
+    return 0;
+}
