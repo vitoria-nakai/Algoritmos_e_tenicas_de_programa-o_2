@@ -1,0 +1,70 @@
+/*
+Crie uma função que receba duas strings e retorne a maior substring
+comum entre elas.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+char subString(char * str1, char * str2){
+    
+    int c1 = strlen(str1);
+    int c2 = strlen(str2);
+    
+    int tabela[c1 + 1][c2 + 1];
+    
+    int maiorTamanho = 0;
+    int indiceFinal = 0;
+    
+    for(int i = 0; i < c1; i++){
+        for(int j = 0; j < c2; j++){
+            if(i == 0 || j == 0){
+                tabela[i][j] = 0;
+            }else if(str1[i-1] == str2[j-1]){
+                tabela[i][j] = 1 + tabela[i-1][j-1];
+                
+                if(tabela[i][j] > maiorTamanho){
+                maiorTamanho = tabela[i][j];
+                indiceFinal = i;
+            } else tabela[i][j] = 0;
+            
+    }
+    
+    if(maiorTamanho == 0){
+        return NULL;
+    }
+    
+    char * resultado = (char*)malloc(sizeof(char) * (maiorTamanho + 1));
+    
+    strncpy(resultado, &str1[indiceFinal - maiorTamanho], maiorTamanho);
+    
+    resultado[maiorTamanho] = '\0';
+    
+    return resultado;
+}
+
+
+int main(){
+    
+    char primeiraString[100];
+    char segundaString[100];
+    char * substring = subString(primeiraString, segundaString);
+    
+    printf("Digite a primeira string: ");
+    fgets(primeiraString, sizeof(primeiraString), stdin);
+    primeiraString[strcspn(primeiraString, "\n")] = '\0';
+    
+    printf("Digite a segunda string: ");
+    fgets(segundaString, sizeof(segundaString), stdin);
+    segundaString[strcspn(segundaString, "\n")]) = '\0';
+    
+    if(substring != NULL){
+        printf("A maior substring comum é: %s\n", substring);
+        free(substring);
+    } else {
+        printf("Nenhuma substringcomum encontrada.\n")
+    }
+    
+    return 0;
+}
