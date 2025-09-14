@@ -1,0 +1,59 @@
+/*
+Desenvolva um programa que concatene o conteúdo de dois arquivos em um 
+terceiro arquivo.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int main(){
+    
+    char nomeArquivo1[100];
+    char nomeArquivo2[100];
+    char nomeArquivo3[100];
+    
+    char str[100];
+    
+    printf("Digite o nome do arquivo 1: ");
+    fgets(nomeArquivo1, sizeof(nomeArquivo1), stdin);
+    nomeArquivo1[strcspn(nomeArquivo1, "\n")] = '\0';
+    
+    printf("Digite o nome do arquivo 2: ");
+    fgets(nomeArquivo2, sizeof(nomeArquivo2), stdin);
+    nomeArquivo2[strcspn(nomeArquivo2, "\n")] = '\0';
+    
+    printf("Digite o nome do arquivo 3: ");
+    fgets(nomeArquivo3, sizeof(nomeArquivo3), stdin);
+    nomeArquivo3[strcspn(nomeArquivo3, "\n")] = '\0';
+    
+    FILE * arquivo1 = fopen(nomeArquivo1, "r");
+    if(arquivo1 == NULL){
+        printf("Erro ao abrir o arquivo 1.");
+        return 1;
+    }
+    FILE * arquivo2 = fopen(nomeArquivo2, "r");
+    if(arquivo2 == NULL){
+        printf("Erro ao abrir o arquivo 2.");
+        return 1;
+    }
+    FILE * arquivo3 = fopen(nomeArquivo3, "a");
+    if(arquivo3 == NULL){
+        printf("Erro ao abrir o arquivo 3.");
+        return 1;
+    }
+    while(fgets(str, sizeof(str), arquivo1) != NULL){
+        fputs(str, arquivo3);
+    }
+    
+    while(fgets(str, sizeof(str), arquivo2) != NULL){
+        fputs(str, arquivo3);
+    }
+    
+    fclose(arquivo1);
+    fclose(arquivo2);
+    fclose(arquivo3);
+    
+    return 0;
+}
