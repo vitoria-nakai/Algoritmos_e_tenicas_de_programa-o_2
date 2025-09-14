@@ -1,0 +1,31 @@
+/*
+Crie um programa que solicite ao usuário para inserir 5 nomes 
+e os salve em um arquivo de texto chamado "nomes.txt", um nome por linha.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    
+    FILE * arquivo = fopen("nomes.txt", "w");
+    if(arquivo == NULL){
+        printf("Erro de abertura do arquivo.");
+        return 1;
+    }
+    
+    char nome[100];
+    
+    for(int i = 0; i < 5; i++){
+        
+        printf("Digite o nome %d: ", i + 1);
+        fgets(nome, sizeof(nome), stdin);
+        
+        fputs(nome, arquivo);
+    }
+    
+    fclose(arquivo);
+    
+    return 0;
+}
