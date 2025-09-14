@@ -1,0 +1,24 @@
+/*
+Desenvolva um programa que conte o número de linhas em um 
+arquivo de texto e exiba o resultado.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    
+    FILE * arquivo = fopen("nomes.txt", "r");
+    int contador = 0;
+    char str[100];
+    
+    
+    while(fgets(str, sizeof(str), arquivo) != NULL) contador++;
+    
+    fclose(arquivo);
+    
+    printf("O número de linhas do arquivo é de %d", contador);
+    
+    return 0;
+}
