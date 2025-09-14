@@ -5,25 +5,53 @@ trás para frente, ignorando espaços e pontuação).
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<ctype.h>
 #include<string.h>
 
-int palindromo(char *str){
-    int i = 0;
-    int j = strlen(str) - 1;
-    while(i < j){
-        if(str[i] != str[j]) return 0;
-        i++;
-        j--;
+void soLetras(char * str){
+    
+    int j = 0;
+    
+    for(int i = 0; str[i] != '\0'; i++){
+        if(isalpha(str[i]) != 0){
+            str[j] = tolower(str[i]);
+            j++;
+        }
     }
-    return 1;
+
+    str[j] = '\0';
+    
 }
 
+int ehPalindromo(char * String){
+    
+    int aux = strlen(String) - 1;
+
+    for(int i = 0; i < strlen(String) - 1; i++){
+        
+        if(String[i] != String[aux]){
+            return 1;
+        }
+        
+        aux--;
+    }
+    
+    return 0;
+}
+    
 int main(){
-    char str[50];
-    printf("Digite sua string: ");
-    gets(str);
-    if(palindromo(str) == 0) printf("Sua string não eh palindromo.");
-    else printf("Sua string eh palindromo.");
-    getchar();
+    
+    char string[50];
+    
+    printf("Digite a string: ");
+    fgets(string, sizeof(string), stdin);
+    string[strcspn(string, "\n")] = '\0';
+    
+    soLetras(string);
+    
+    if(ehPalindromo(string) == 0) printf("Eh palindromo!");
+    else if(ehPalindromo(string) == 1) printf("Nao eh palindromo!");
+    else printf("Erro de função palindromo");
+    
     return 0;
 }
