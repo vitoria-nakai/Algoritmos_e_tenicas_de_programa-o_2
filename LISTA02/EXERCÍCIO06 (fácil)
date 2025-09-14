@@ -1,0 +1,29 @@
+/*
+Escreva um programa que remova todos os espaços em branco de uma string.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    
+    char string[100];
+    
+    printf("Digite uma string: ");
+    fgets(string, sizeof(string), stdin);
+    
+    int tamanho = strlen(string);
+    int j = 0;
+    
+    for(int i = 0; i < tamanho; i++){
+        if(string[i] != ' '){
+            string[j] = string[i];
+            j++;
+        } 
+    }
+    
+    printf("Removendo os espaços, a string fica: %s", string);
+    
+    return 0;
+}
