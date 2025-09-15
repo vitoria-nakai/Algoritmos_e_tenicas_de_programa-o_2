@@ -1,0 +1,43 @@
+/*
+Crie um programa que permita ao usuário adicionar códigos de produtos a 
+uma lista de compras. Os produtos adicionados recentemente (mais urgentes)
+devem aparecer no início da lista.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct produto{
+    int codigo;
+    struct produto * prox;
+} produto;
+
+int main(){
+    
+    produto * lista = NULL;
+    
+    printf("\n\n--------- LISTA DE COMPRAS ---------\n\n");
+    printf("Insira os 3 códigos de produtos.\n");
+    for(int i = 1; i < 4; i++){
+        
+        produto * novoProd = (produto*)malloc(sizeof(produto));
+        
+        printf("Código do produto %d: ", i);
+        scanf("%d", &novoProd->codigo);
+        
+        novoProd->prox = lista;
+        lista = novoProd;
+    }
+    
+    produto * atual = lista;
+    
+    printf("\n\n--- LISTA DE CÓDIGOS ---\n\n");
+    
+    for(int i = 1; i < 4; i++){
+        printf("O código do produto %d: %d\n", i, atual->codigo);
+        atual = atual->prox;        
+    }
+    
+    return 0;
+}
