@@ -1,0 +1,113 @@
+/*
+Considerando a atividade anterior, modifique o subprograma do item b) 
+de modo que a lista de funcionários fique sempre ordenada em ordem 
+crescente de número de matrícula. Além disso, faça um novo subprograma 
+que exclua uma ficha (nó) da lista, a partir do número de matrícula 
+do funcionário.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct regFunc{
+    int Numero_Matricula;
+    char Nome[50];
+    struct regFunc * prox;
+}regFunc;
+
+regFunc * listaRFunc = NULL;
+
+void addFunc(regFunc ** head){
+    
+    regFunc * atual = (*head);
+    regFunc * novoF = (regFunc*)malloc(sizeof(regFunc));
+    
+    printf("\n\n--- +FUNCIONARIO ---\n\n");
+    
+    printf("Digite o nome do funcionário: ");
+    fgets(novoF->Nome , sizeof(novoF->Nome ), stdin);
+    
+    printf("Digite o numero de matricula do funcionario: ");
+    scanf("%d", &novoF->Numero_Matricula);
+    getchar();
+    
+    if((*head) == NULL || novoF->Numero_Matricula < (*head)->Numero_Matricula){
+        novoF->prox = (*head);
+        (*head) = novoF;
+    }else while(atual->prox != NULL && atual->prox->Numero_Matricula < novoF->Numero_Matricula){
+        atual = atual->prox;
+        }
+        novoF->prox = atual->prox;
+        atual->prox = novoF;
+}
+
+void visu(regFunc * head){
+    
+    printf("\n\n--- LISTA DE FUNCIONÁRIOS ---\n\n");
+    
+    while(head != NULL){
+        printf("Funcionario de numero %d\n", head->Numero_Matricula);
+        printf("Nome do funcionario: %s\n\n", head->Nome);
+        head = head->prox;
+    }
+}
+
+void excluir(regFunc ** head){
+    
+    int numM;
+    regFunc * atual = (*head);
+    regFunc * anterior = NULL;
+    
+    printf("--- EXCLUSÃO DE MATRICULA ---");
+    printf("Digite o número de matrícula: ");
+    scanf("%d", &numM);
+    getchar();
+    
+    if(atual == NULL){
+        printf("A lista está vazia. Nenhuma matricula para excluir.\n");
+        return;
+    } else if(atual->Numero_Matricula == numM){
+        (*head) = atual->prox;
+        free(atual);
+        printf("Matricula %d excluida com sucesso.\n", numM);
+        return;
+    } else 
+        while(atual != NULL && atual->Numero_Matricula != numM){
+            anterior = atual;
+            atual = atual->prox;
+        if(atual == NULL){
+            printf("Matricula %d não encontrada na lista.\n", numM);
+            return;
+        } else anterior->prox = atual->prox;
+        free(atual);
+        printf("Matricula %d excluída com sucesso.\n", numM);
+    }
+    
+}
+
+int main(){
+    
+    int op = -1;
+    
+    while(op != 0 ){
+        printf("\n\n---------- CADASTRO DE FUNCIONÁRIOS ----------\n\n");
+        printf("Operações disponíveis:");
+        printf("\n0 - Fechar o sistema");
+        printf("\n1 - Cadastrar funcionário");
+        printf("\n2 - Visualizar os funcionários cadastrados");
+        printf("\n3 - Excluir cadastro de funcionário");
+        printf("\nDigite o número da operação desejada: ");
+        scanf("%d", &op);
+        getchar();
+    
+        if(op == 1) addFunc(&listaRFunc);
+        else if(op == 2) visu(listaRFunc);
+        else if(op == 0){
+            printf("Fechamento do sistema.\n");
+            return 0;
+        }else if(op == 3) excluir(&listaRFunc);
+         else printf("Dígito sem operação correspondente. Faça novamente.\n");
+    }
+    return 0;
+}
