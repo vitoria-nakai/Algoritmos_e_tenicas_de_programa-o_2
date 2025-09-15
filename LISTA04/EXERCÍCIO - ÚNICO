@@ -1,0 +1,76 @@
+/*
+Assumindo que o sistema utiliza uma lista encadeada dinâmica para 
+armazenar as informações dos funcionários (Número_Matricula e Nome),
+e que os números das matrículas estão no intervalo 1-10:
+
+a) Definir o registro "regFunc", para cadastro de funcionários, e declarar
+a variável global "tipo ponteiro" listaRFunc;
+
+b)Construir um subprograma para realizar a leitura dos dados (matricula e
+nome), a partir do teclado, de um funcionário a ser cadastrado, e 
+incluir este novo registro de funcionário na 
+lista de funcionários.
+
+c) Fazer um subprograma que percorra a lista montada escrevendo Número de Matrícula e 
+Nome de cada nó. 
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct regFunc{
+    int Numero_Matricula;
+    char Nome[50];
+    struct regFunc * prox;
+}regFunc;
+
+regFunc * listaRFunc = NULL;
+
+void addFunc(regFunc ** head){
+    
+    regFunc * novoF = (regFunc*)malloc(sizeof(regFunc));
+    printf("\n\n--- +FUNCIONARIO ---\n\n");
+    printf("Digite o nome do funcionário: ");
+    fgets(novoF->Nome , sizeof(novoF->Nome ), stdin);
+    printf("Digite o numero de matricula do funcionario: ");
+    scanf("%d", &novoF->Numero_Matricula);
+    getchar();
+    
+    novoF->prox = *head;
+    *head = novoF;
+}
+
+void visu(regFunc * head){
+    
+    printf("\n\n--- LISTA DE FUNCIONÁRIOS ---\n\n");
+    
+    while(head != NULL){
+        printf("Funcionario de numero %d\n", head->Numero_Matricula);
+        printf("Nome do funcionario: %s\n\n", head->Nome);
+        head = head->prox;
+    }
+}
+
+int main(){
+    
+    int op;
+    while(op != 0 ){
+        printf("\n\n---------- CADASTRO DE FUNCIONÁRIOS ----------\n\n");
+        printf("Operações disponíveis:");
+        printf("\n0 - Fechar o sistema");
+        printf("\n1 - Cadastrar funcionário");
+        printf("\n2 - Visualizar os funcionários cadastrados");
+        printf("\nDigite o número da operação desejada: ");
+        scanf("%d", &op);
+        getchar();
+    
+        if(op == 1) addFunc(&listaRFunc);
+        else if(op == 2) visu(listaRFunc);
+        else if(op == 0){
+            printf("Fechamento do sistema.\n");
+            return 0;
+        } else printf("Dígito sem operação correspondente. Faça novamente.\n");
+    }
+    return 0;
+}
