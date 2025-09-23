@@ -1,0 +1,33 @@
+/*
+Escrever uma função em C que calcula o fatorial de um número inteiro
+não negativo usando recursão.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int fatorial(int x){
+    int count = 1; 
+    
+    if(x == 0) return 1;
+    else {
+        return x * fatorial(x - 1);        
+    }
+}
+
+int main(){
+    
+    int num;
+    
+    printf("Digite um número não negativo: ");
+    scanf("%d", &num);
+    
+    if(num < 0){
+        printf("Número negativo detectado. Fechando programa.");
+        return 1;
+    } else {
+        printf("O fatorial desse número é %d", fatorial(num));
+    }
+    
+    return 0;
+}
