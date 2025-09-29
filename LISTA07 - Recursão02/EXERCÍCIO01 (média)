@@ -1,0 +1,29 @@
+/*
+Uma função recursiva que calcule a soma dos dígitos de um número inteiro positivo.
+*/
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int somarDig(int x){
+    int aux;
+    if(x == 0){
+        return x;
+    } else {
+        aux = aux + (x % 10);
+        return aux + somarDig(x / 10);
+    }
+    
+}
+
+int main(){
+    int num;
+    
+    printf("Digite um número: ");
+    scanf("%d", &num);
+    
+    printf("A soma dos dígitos do seu número é igual a %d", somarDig(num));
+    
+    getchar();
+    return 0;
+}
